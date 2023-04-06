@@ -39,7 +39,7 @@ func _on_ant_color_change_requested(coordinate, new_color) -> void:
 	board.swap_tile(coordinate, new_color)
 
 
-func _on_ant_move_requested(ant, old_coordinate, requested_coordinate) -> void:
+func _on_ant_move_requested(_ant, _old_coordinate, requested_coordinate) -> void:
 	if board.get_cell_source_id(0, requested_coordinate) != -1 :
 		place_ant(requested_coordinate)
 	
@@ -72,4 +72,5 @@ func _on_reset_button_pressed() -> void:
 	board.initialize_map(board_size)
 	tick_timer.paused = true
 	place_ant(Vector2i((board_size - 1)/2, (board_size - 1)/2))
+
 

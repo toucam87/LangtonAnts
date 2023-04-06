@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbquj63ci2clq"]
+
+[ext_resource type="Script" path="res://Singletons/mouse.gd" id="1_vgocs"]
+
+[node name="Mouse" type="Node"]
+script = ExtResource("1_vgocs")
