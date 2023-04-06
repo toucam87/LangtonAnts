@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://beyg7bf56dahj"]
+
+[ext_resource type="Texture2D" uid="uid://ccu62f44sny7w" path="res://Sprites/ColorSquareTileset.png" id="1_wuy0l"]
+[ext_resource type="Script" path="res://Board/board_tilemap.gd" id="2_1rdc4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_clall"]
+texture = ExtResource("1_wuy0l")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/custom_data_0 = 1
+2:0/0 = 0
+2:0/0/custom_data_0 = 2
+3:0/0 = 0
+3:0/0/custom_data_0 = 3
+4:0/0 = 0
+4:0/0/custom_data_0 = 4
+5:0/0 = 0
+5:0/0/custom_data_0 = 5
+6:0/0 = 0
+6:0/0/custom_data_0 = 6
+7:0/0 = 0
+7:0/0/custom_data_0 = 7
+
+[sub_resource type="TileSet" id="TileSet_etp74"]
+tile_size = Vector2i(128, 128)
+custom_data_layer_0/name = "ColorID"
+custom_data_layer_0/type = 2
+sources/0 = SubResource("TileSetAtlasSource_clall")
+
+[node name="BoardTilemap" type="TileMap"]
+tile_set = SubResource("TileSet_etp74")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 65537, 0, 0, 131073, 0, 0, 131074, 0, 0, 196610, 0, 0, 196611, 0, 0, 131075, 0, 0, 65539, 0, 0, 2, 0, 0, 1, 0, 0, 65538, 0, 0, 3, 0, 0, 131072, 0, 0, 196608, 0, 0, 196609, 0, 0)
+script = ExtResource("2_1rdc4")

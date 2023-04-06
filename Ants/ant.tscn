@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://datdbvehpv6cd"]
+
+[ext_resource type="Script" path="res://Ants/ant.gd" id="1_cor31"]
+[ext_resource type="Texture2D" uid="uid://c5q5o3n2o1aex" path="res://Sprites/triangle pointer.png" id="2_hgad7"]
+
+[node name="Ant" type="Node2D"]
+script = ExtResource("1_cor31")
+
+[node name="AntSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_hgad7")

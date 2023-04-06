@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwwgw81vfedfh"]
+
+[ext_resource type="Script" path="res://Main Scene/Camera2D.gd" id="1_33pa6"]
+[ext_resource type="PackedScene" uid="uid://c8sm1h0ecovfc" path="res://Main Scene/game_board.tscn" id="1_37bbv"]
+
+[node name="World" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
+script = ExtResource("1_33pa6")
+
+[node name="GameBoard" parent="." instance=ExtResource("1_37bbv")]
+board_size = 127
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SpeedSlider" type="HSlider" parent="CanvasLayer"]
+offset_left = 11.0
+offset_top = 380.0
+offset_right = 117.0
+offset_bottom = 448.0
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer/SpeedSlider"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -8.0
+offset_right = 77.0
+offset_bottom = 18.0
+text = "speed"
+
+[node name="PlayPauseButton" type="Button" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 308.0
+offset_right = 113.0
+offset_bottom = 339.0
+text = "Play/Pause
+"
+
+[node name="ResetButton" type="Button" parent="CanvasLayer"]
+offset_left = 40.0
+offset_top = 254.0
+offset_right = 91.0
+offset_bottom = 285.0
+text = "Reset"
+
+[connection signal="board_size_changed" from="GameBoard" to="Camera2D" method="_on_game_board_board_size_changed"]
+[connection signal="value_changed" from="CanvasLayer/SpeedSlider" to="GameBoard" method="_on_speed_slider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/PlayPauseButton" to="GameBoard" method="_on_play_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ResetButton" to="GameBoard" method="_on_reset_button_pressed"]
