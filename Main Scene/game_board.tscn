@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8sm1h0ecovfc"]
+[gd_scene load_steps=3 format=3 uid="uid://c8sm1h0ecovfc"]
 
 [ext_resource type="Script" path="res://Main Scene/game_board.gd" id="1_ru207"]
 [ext_resource type="PackedScene" uid="uid://beyg7bf56dahj" path="res://Board/board_tilemap.tscn" id="2_8cdcr"]
-[ext_resource type="PackedScene" uid="uid://datdbvehpv6cd" path="res://Ants/ant.tscn" id="3_cubad"]
 
 [node name="GameBoard" type="Node2D"]
 script = ExtResource("1_ru207")
@@ -10,13 +9,9 @@ script = ExtResource("1_ru207")
 [node name="BoardTilemap" parent="." instance=ExtResource("2_8cdcr")]
 cell_quadrant_size = 128
 
-[node name="Ant" parent="." instance=ExtResource("3_cubad")]
-
 [node name="TickTimer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
 
 [connection signal="board_size_changed" from="BoardTilemap" to="." method="_on_board_tilemap_board_size_changed"]
-[connection signal="color_change_requested" from="Ant" to="." method="_on_ant_color_change_requested"]
-[connection signal="move_requested" from="Ant" to="." method="_on_ant_move_requested"]
 [connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]

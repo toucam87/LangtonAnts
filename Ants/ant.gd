@@ -5,7 +5,7 @@ extends Node2D
 @onready var sprite = $AntSprite
 
 var coordinate := Vector2i(0,0) #ant position on grid
-var orientation := 0 #orientations/directions are increments from 0 to 7, O being forward, 2 right, 4 back, 6 left
+var orientation := 0 : set = set_orientation 
 var instructions = {} #key is integer of color, returns the rotation amount and the new color of the tile
 
 var tile_looked_at = {
@@ -28,6 +28,7 @@ func _ready() -> void:
 	set_instructions()
 	
 
+
 func set_instructions():
 	instructions[WHITE] = [-2, BLACK]
 	instructions[BLACK] = [2, WHITE]
@@ -41,9 +42,15 @@ func apply_instruction(old_tile_color : int):
 		move_requested.emit(self, coordinate, requested_coordinate)
 
 
-func rotate_ant(direction : int):
-	orientation = positive_modulo(orientation + direction, 8)
+#orientations/directions are increments from 0 to 7, O being forward, 2 right, 4 back, 6 left
+func set_orientation(value: int):
+	orientation = positive_modulo(value, 8)
 	rotation = orientation * PI/4
+
+
+
+func rotate_ant(direction : int):
+	orientation = orientation + direction
 
 
 func positive_modulo(a: int, b: int) -> int:
