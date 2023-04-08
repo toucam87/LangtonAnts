@@ -1,0 +1,5 @@
+[gd_resource type="ButtonGroup" format=3 uid="uid://c41dmvk5sjyp1"]
+
+[resource]
+resource_local_to_scene = false
+resource_name = "Tiles_Ants"

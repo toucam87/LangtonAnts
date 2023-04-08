@@ -7,8 +7,10 @@ extends Node2D
 
 var ant_scene = preload("res://Ants/ant.tscn") 
 var ants = []
-
+var is_placing_ants = false
+var orientation_of_ant_to_place = 0
 var iterations_per_tick = 1
+
 
 signal board_size_changed(size)
 
@@ -38,23 +40,61 @@ func destroy_ant(ant:Ant):
 		print("no ants left")
 
 
+func destroy_all_ants():
+	for i in range(0, ants.size()):
+		destroy_ant(ants.back())
+	print(ants)
+
+
 func activate_ant(ant):
 	var old_tile_data = board.get_cell_tile_data(0, ant.coordinate)
 	var old_tile_color = old_tile_data.get_custom_data_by_layer_id(0)
 	ant.apply_instruction(old_tile_color)
+
+
+func activate_all_ants():
+	for ant in ants:
+		activate_ant(ant)
+
 	
+func ants_present(coordinate : Vector2i):
+	var list_of_ants_present = []
+	if board.is_tile_in_map(coordinate):
+		for ant in ants:
+			if ant.coordinate == coordinate:
+				list_of_ants_present.append(ant)
+	return list_of_ants_present
+
 
 func initialize_board():
 	board.initialize_map(board_size)
 	tick_timer.paused = true
 	spawn_ant()
-	spawn_ant()
 	place_ant(ants[0], Vector2i((board_size - 1)/2, (board_size - 1)/2))
-	place_ant(ants[1], Vector2i((board_size - 1)/2, (board_size - 1)/2) + Vector2i(20,20), 2)
+
 
 
 func clash_with_wall(ant, _old_coordinate, _requested_coordinate):
 	destroy_ant(ant)
+
+
+#ant placer method
+func _input(event: InputEvent) -> void:
+	if is_placing_ants:
+		if event.is_action_pressed("left click"):
+			var coordinate = board.local_to_map(board.to_local(Mouse.mouse_pos)) 
+			if board.is_tile_in_map(coordinate):
+				spawn_ant()
+				place_ant(ants.back(), coordinate, orientation_of_ant_to_place)
+		elif event.is_action_pressed("right click"):
+			var coordinate = board.local_to_map(board.to_local(Mouse.mouse_pos)) 
+			var ants_clicked = ants_present(coordinate)
+			if ants_clicked.size() > 0:
+				for ant in ants_clicked:
+					destroy_ant(ant)
+			
+
+
 
 
 func _on_board_tilemap_board_size_changed(size) -> void:
@@ -67,17 +107,15 @@ func _on_ant_color_change_requested(coordinate, new_color) -> void:
 
 
 func _on_ant_move_requested(ant, _old_coordinate, requested_coordinate) -> void:
-	if board.get_cell_source_id(0, requested_coordinate) != -1 :
+	if board.is_tile_in_map(requested_coordinate) :
 		place_ant(ant, requested_coordinate)
 	else:
 		clash_with_wall(ant, _old_coordinate, requested_coordinate)
 	
 
-
 func _on_tick_timer_timeout() -> void:
 	for i in range(iterations_per_tick):
-		for ant in ants:
-			activate_ant(ant)
+		activate_all_ants()
 
 
 func _on_speed_slider_value_changed(value: float) -> void:
@@ -97,6 +135,19 @@ func _on_play_pause_button_pressed() -> void:
 
 
 func _on_reset_button_pressed() -> void:
+	destroy_all_ants()
 	initialize_board()
 
 
+func _on_paint_tiles_button_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		board.is_painting_tiles = true
+	else:
+		board.is_painting_tiles = false
+
+
+func _on_place_ants_button_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		is_placing_ants = true
+	else:
+		is_placing_ants = false

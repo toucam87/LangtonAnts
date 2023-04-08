@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr4r1vgtic7po"]
+
+[sub_resource type="GDScript" id="GDScript_8de8e"]
+script/source = "extends Button
+
+
+func _on_place_ants_button_toggled(button_pressed: bool) -> void:
+	self.button_pressed = not self.button_pressed
+"
+
+[node name="PaintTilesButton" type="Button"]
+offset_left = 21.0
+offset_top = 468.0
+offset_right = 109.0
+offset_bottom = 499.0
+toggle_mode = true
+button_pressed = true
+text = "Paint Tiles
+"
+script = SubResource("GDScript_8de8e")
