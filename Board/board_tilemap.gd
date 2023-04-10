@@ -29,7 +29,7 @@ func swap_tile(coord :Vector2i, new_color : int):
 func is_tile_in_map(coordinate) -> bool:
 	return get_cell_source_id(0, coordinate) != -1
 
-
+#painting tiles
 func _input(_event: InputEvent) -> void:
 	if is_painting_tiles:
 		if Mouse.left_click_pressed == true:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccu62f44sny7w"
-path="res://.godot/imported/ColorSquareTileset.png-0d43ff64dee0343adac3dd57732b8926.ctex"
+uid="uid://2m48aoryubye"
+path="res://.godot/imported/greenSheet.png-fb50e0ff360985f136fae7b0ad3b8e82.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/ColorSquareTileset.png"
-dest_files=["res://.godot/imported/ColorSquareTileset.png-0d43ff64dee0343adac3dd57732b8926.ctex"]
+source_file="res://UI/greenSheet.png"
+dest_files=["res://.godot/imported/greenSheet.png-fb50e0ff360985f136fae7b0ad3b8e82.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

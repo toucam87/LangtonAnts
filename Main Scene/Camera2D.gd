@@ -13,6 +13,8 @@ func adjust_zoom(board_size):
 		zoom = Vector2(1/16.0, 1/16.0)
 	
 	Mouse.camera_zoom = 1.0 / zoom.x
+	position = Mouse.camera_zoom * Mouse.viewport_center
+	
 
 
 func _on_game_board_board_size_changed(size) -> void:

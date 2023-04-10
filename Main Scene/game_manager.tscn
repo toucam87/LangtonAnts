@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgtky3gwc34sa"]
+
+[ext_resource type="Script" path="res://Main Scene/game_manager.gd" id="1_6vieg"]
+[ext_resource type="PackedScene" uid="uid://cnbva3k62yec" path="res://Board/board_tilemap.tscn" id="2_8cdcr"]
+[ext_resource type="PackedScene" uid="uid://cqxdmh5f6wqpg" path="res://Ants/ants_manager.tscn" id="2_dt4gq"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_6vieg")
+
+[node name="BoardTilemap" parent="." instance=ExtResource("2_8cdcr")]
+
+[node name="AntsManager" parent="." instance=ExtResource("2_dt4gq")]
+
+[node name="TickTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[connection signal="board_size_changed" from="BoardTilemap" to="." method="_on_board_tilemap_board_size_changed"]
+[connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]

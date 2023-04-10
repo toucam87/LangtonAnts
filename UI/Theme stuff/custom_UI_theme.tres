@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://ccuwvpeh7rqrx"]
+
+[ext_resource type="Texture2D" uid="uid://gutly3kv1heq" path="res://UI/greySheet.png" id="1_iinn6"]
+[ext_resource type="StyleBox" uid="uid://d1i5tdm8d2nq6" path="res://UI/Theme stuff/normal_button_texture.tres" id="2_7wd6r"]
+[ext_resource type="StyleBox" uid="uid://dffasbr7mifdn" path="res://UI/Theme stuff/pressed_button_texture.tres" id="3_k5gmm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kspsi"]
+bg_color = Color(0.945098, 0.898039, 0.552941, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erwhn"]
+atlas = ExtResource("1_iinn6")
+region = Rect2(0, 332, 190, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_egiv8"]
+texture = SubResource("AtlasTexture_erwhn")
+texture_margin_left = 7.0
+texture_margin_top = 3.0
+texture_margin_right = 7.0
+texture_margin_bottom = 9.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[resource]
+Button/colors/font_color = Color(0.231373, 0.231373, 0.231373, 1)
+Button/colors/font_focus_color = Color(0.231373, 0.231373, 0.231373, 0.643137)
+Button/colors/font_hover_color = Color(0.231373, 0.231373, 0.231373, 0.643137)
+Button/colors/font_pressed_color = Color(0.231373, 0.231373, 0.231373, 0.643137)
+Button/styles/focus = SubResource("StyleBoxFlat_kspsi")
+Button/styles/hover = SubResource("StyleBoxTexture_egiv8")
+Button/styles/normal = ExtResource("2_7wd6r")
+Button/styles/pressed = ExtResource("3_k5gmm")

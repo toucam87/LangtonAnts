@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://nuqxhflo4l7b"]
+
+[ext_resource type="Theme" uid="uid://ccuwvpeh7rqrx" path="res://UI/Theme stuff/custom_UI_theme.tres" id="1_s7iqq"]
+[ext_resource type="Script" path="res://UI/ui_main.gd" id="2_8xsbq"]
+[ext_resource type="Script" path="res://UI/SpeedSlider.gd" id="3_de76p"]
+[ext_resource type="ButtonGroup" uid="uid://c41dmvk5sjyp1" path="res://UI/tiles_ants_ButtonGroup.tres" id="3_s5l05"]
+
+[node name="UI main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_s7iqq")
+script = ExtResource("2_8xsbq")
+
+[node name="SpeedSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 380.0
+offset_right = 117.0
+offset_bottom = 448.0
+min_value = 1.0
+max_value = 10.0
+value = 6.0
+script = ExtResource("3_de76p")
+
+[node name="SpeedLabel" type="Label" parent="SpeedSlider"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -8.0
+offset_right = 77.0
+offset_bottom = 18.0
+text = "speed"
+
+[node name="PlayPauseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 308.0
+offset_right = 113.0
+offset_bottom = 339.0
+text = "Play/Pause
+"
+
+[node name="ResetButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 254.0
+offset_right = 91.0
+offset_bottom = 285.0
+text = "Reset"
+
+[node name="PaintTilesButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 468.0
+offset_right = 109.0
+offset_bottom = 499.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("3_s5l05")
+text = "Paint Tiles"
+
+[node name="PlaceAntsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 526.0
+offset_right = 110.0
+offset_bottom = 557.0
+toggle_mode = true
+button_group = ExtResource("3_s5l05")
+text = "Place Ants"
+
+[connection signal="value_changed" from="SpeedSlider" to="." method="_on_speed_slider_value_changed"]
+[connection signal="pressed" from="PlayPauseButton" to="." method="_on_play_pause_button_pressed"]
+[connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="toggled" from="PaintTilesButton" to="." method="_on_paint_tiles_button_toggled"]
+[connection signal="toggled" from="PlaceAntsButton" to="." method="_on_place_ants_button_toggled"]
