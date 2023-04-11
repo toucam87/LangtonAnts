@@ -8,6 +8,10 @@ var coordinate := Vector2i(0,0) #ant position on grid
 var orientation := 0 : set = set_orientation 
 var instructions = {} #key is integer of color, returns the rotation amount and the new color of the tile
 
+@export var is_fertile = true
+var fertility_counter = 0
+var fertility_counter_threshold = 10
+
 var tile_looked_at = {
 	0 : Vector2i(0,-1),
 	1 : Vector2i(1,-1),
@@ -40,6 +44,16 @@ func apply_instruction(old_tile_color : int):
 		color_change_requested.emit(coordinate,instructions[old_tile_color][1])
 		var requested_coordinate = coordinate + tile_looked_at[orientation]
 		move_requested.emit(self, coordinate, requested_coordinate)
+	else:
+		apply_default_instruction()
+		
+
+
+func apply_default_instruction():
+	rotate_ant(-2)
+	color_change_requested.emit(coordinate, BLACK)
+	var requested_coordinate = coordinate + tile_looked_at[orientation]
+	move_requested.emit(self, coordinate, requested_coordinate) 
 
 
 #orientations/directions are increments from 0 to 7, O being forward, 2 right, 4 back, 6 left
@@ -53,5 +67,14 @@ func rotate_ant(direction : int):
 	orientation = orientation + direction
 
 
+func tick_fertility_counter():
+	if is_fertile == false:
+		fertility_counter += 1
+		if fertility_counter >= fertility_counter_threshold:
+			is_fertile = true
+			fertility_counter = 0
+
+
 func positive_modulo(a: int, b: int) -> int:
 	return ((a % b) + b) % b
+
