@@ -10,6 +10,8 @@ var iterations_per_tick = 1
 var ticks_from_start = 0
 
 signal board_size_changed(size)
+signal ticks_updated(ticks)
+signal number_of_ants_updated(number_of_ants)
 
 
 func _ready() -> void:
@@ -24,7 +26,10 @@ func initialize_board():
 	ticks_from_start = 0
 	ants_manager.spawn_ant()
 	ants_manager.place_ant(ants_manager.ants[0], Vector2i((board_size - 1)/2, (board_size - 1)/2))
-		
+	ticks_updated.emit(ticks_from_start)
+	number_of_ants_updated.emit(ants_manager.ants.size())
+
+
 
 func _on_board_tilemap_board_size_changed(size) -> void:
 	board_size_changed.emit(size)
@@ -35,8 +40,8 @@ func _on_tick_timer_timeout() -> void:
 		ants_manager.resolve_ants_on_same_cell()
 		ants_manager.activate_all_ants()
 		ticks_from_start += 1
-		print("number of ants : ", ants_manager.ants.size())
-		print("tick timer : ", ticks_from_start)
+		ticks_updated.emit(ticks_from_start)
+		number_of_ants_updated.emit(ants_manager.ants.size())
 
 
 func _on_speed_slider_value_changed(value: float) -> void:
@@ -72,3 +77,12 @@ func _on_place_ants_button_toggled(button_pressed: bool) -> void:
 		ants_manager.is_placing_ants = true
 	else:
 		ants_manager.is_placing_ants = false
+
+
+func _on_ants_manager_player_changed_number_of_ants(current_number) -> void:
+	number_of_ants_updated.emit(current_number)
+
+
+func _on_ants_manager_no_ants_left() -> void:
+	tick_timer.paused = true
+

@@ -72,6 +72,47 @@ toggle_mode = true
 button_group = ExtResource("3_s5l05")
 text = "Place Ants"
 
+[node name="StatsVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -58.0
+offset_right = -52.0
+offset_bottom = 58.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TickTimerTitle" type="Label" parent="StatsVBox"]
+layout_mode = 2
+text = "Ticks
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TickTimerCount" type="Label" parent="StatsVBox"]
+layout_mode = 2
+text = "1000
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NumberofAntsTitle" type="Label" parent="StatsVBox"]
+layout_mode = 2
+text = "Number of Ants"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NumberofAntsCount" type="Label" parent="StatsVBox"]
+layout_mode = 2
+text = "100
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="value_changed" from="SpeedSlider" to="." method="_on_speed_slider_value_changed"]
 [connection signal="pressed" from="PlayPauseButton" to="." method="_on_play_pause_button_pressed"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

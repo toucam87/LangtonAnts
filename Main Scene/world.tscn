@@ -6,6 +6,10 @@
 
 [node name="World" type="Node"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UserInterface" parent="CanvasLayer" instance=ExtResource("3_lj8wd")]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
 script = ExtResource("1_33pa6")
@@ -14,13 +18,11 @@ script = ExtResource("1_33pa6")
 position = Vector2(640, 360)
 board_size = 79
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="UserInterface" parent="CanvasLayer" instance=ExtResource("3_lj8wd")]
-
-[connection signal="board_size_changed" from="GameManager" to="Camera2D" method="_on_game_board_board_size_changed"]
 [connection signal="painting_tiles" from="CanvasLayer/UserInterface" to="GameManager" method="_on_paint_tiles_button_toggled"]
 [connection signal="placing_ants" from="CanvasLayer/UserInterface" to="GameManager" method="_on_place_ants_button_toggled"]
 [connection signal="play_pause" from="CanvasLayer/UserInterface" to="GameManager" method="_on_play_pause_button_pressed"]
 [connection signal="reset_board" from="CanvasLayer/UserInterface" to="GameManager" method="_on_reset_button_pressed"]
 [connection signal="speed_slider" from="CanvasLayer/UserInterface" to="GameManager" method="_on_speed_slider_value_changed"]
+[connection signal="board_size_changed" from="GameManager" to="Camera2D" method="_on_game_board_board_size_changed"]
+[connection signal="number_of_ants_updated" from="GameManager" to="CanvasLayer/UserInterface" method="_on_game_manager_number_of_ants_updated"]
+[connection signal="ticks_updated" from="GameManager" to="CanvasLayer/UserInterface" method="_on_game_manager_ticks_updated"]

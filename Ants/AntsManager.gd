@@ -12,6 +12,9 @@ var orientation_of_ant_to_place = 0
 @export var fertility_period_option_is_on = true
 @export var fertility_threshold_of_all_ants = 100
 
+signal player_changed_number_of_ants(current_number)
+signal no_ants_left
+
 func spawn_ant():
 	var ant_instance = ant_scene.instantiate() as Ant
 	add_child(ant_instance)
@@ -32,7 +35,7 @@ func destroy_ant(ant:Ant):
 	ants.erase(ant)
 	ant.queue_free()
 	if ants.is_empty():
-		print("no ants left")
+		no_ants_left.emit()
 
 
 func destroy_all_ants():
@@ -96,6 +99,7 @@ func reslove_more_than_two_ants_on_cell(ants_on_same_cell):
 	for ant in ants_on_same_cell:
 		destroy_ant(ant)
 
+
 #ant placer method
 func _input(event: InputEvent) -> void:
 	if is_placing_ants:
@@ -104,12 +108,14 @@ func _input(event: InputEvent) -> void:
 			if board.is_tile_in_map(coordinate):
 				spawn_ant()
 				place_ant(ants.back(), coordinate, orientation_of_ant_to_place)
+				player_changed_number_of_ants.emit(ants.size())
 		elif event.is_action_pressed("right click"):
 			var coordinate = board.local_to_map(board.to_local(Mouse.mouse_pos)) 
 			var ants_clicked = ants_present(coordinate)
 			if ants_clicked.size() > 0:
 				for ant in ants_clicked:
 					destroy_ant(ant)
+					player_changed_number_of_ants.emit(ants.size())
 
 
 
